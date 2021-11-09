@@ -1,4 +1,10 @@
 const server = require("./test.server");
-const route = require("./test.routes");
+const router = require("./test.routes");
+const requesthandlers = require("./test.request.handler");
 
-server.start_server(route.route);
+const handle = {}
+handle["/"] = requesthandlers.start;
+handle["/start"] = requesthandlers.start;
+handle["/upload"] = requesthandlers.upload;
+
+server.start(router.route, handle);

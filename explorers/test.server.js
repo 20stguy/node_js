@@ -1,4 +1,4 @@
-//https://poiemaweb.com/nodejs-file-upload-example
+// // https://poiemaweb.com/nodejs-file-upload-example
 // console.log("Hello World");  // 콘솔에 메세지 출력
 
 // // http서버 만들기 1(대기)
@@ -84,31 +84,87 @@
 // // 모듈화
 // exports.export_server = start_server
 
-
 // // 서버만들기 7 route와 연결
+// const http = require("http");
+// const url = require("url");
+//
+// function request_server(request, response) {
+//     const pathname = url.parse(request.url).pathname;
+//     console.log("Request for " + pathname + "received from request_server.");
+//     response.writeHead(200, {"Content-Type": "text/plain"});
+//     response.write("This is from request_server");
+//     response.end();
+//     console.log("request_serer has running");
+// };
+//
+// function start_server(){
+//     http.createServer(request_server).listen(8080);
+//     console.log("start_server has running");
+//     //request_server()형태로 넣으면 response.writeHead에서 오류가난다.
+//     //아마 writeHead값이 http.createServer아래있는 함수라 그런듯 한다.
+// };
+//
+// // start_server();
+//
+// // 모듈화
+// module.exports = {
+//     start_server
+
+
+// // 서버만들기 8 route 인자로 받기. 함수형 (실패) 추후 도전해보기
+// const http = require("http");
+// const url = require("url");
+// // const route = require("./test.routes")
+//
+// function request_server(request, response) {
+//     const pathname = url.parse(request.url).pathname;
+//     console.log("Request for " + pathname + "  received from request_server.");
+//     response.writeHead(200, {"Content-Type": "text/plain"});
+//     response.write("This is from request_server");
+//     response.end();
+//     console.log("request_serer has running");
+// };
+//
+// function start(route) {
+//     start_server()
+//     function start_server() {
+//         const route = route
+//         console.log("route is " + route)
+//         http.createServer(request_server).listen(8080);
+//         console.log("start_server has running");
+//         //request_server()형태로 넣으면 response.writeHead에서 오류가난다.
+//         //아마 writeHead값이 http.createServer아래있는 함수라 그런듯 한다.
+//     };
+// };
+//
+// // start_server();
+//
+// // 모듈화
+// module.exports = {
+//     start
+// }
+
+// // 서버 만들기 9 route 인자로 받기. 비 함수형
+// // 설명에 의하면 start함수 안에 모든 함수를 넣었고 이경우 route를 모든 함수에 적용이 가능하다.
 const http = require("http");
 const url = require("url");
 
-function request_server(request, response) {
-    const pathname = url.parse(request.url).pathname;
-    console.log("Request for " + pathname + "received from request_server.");
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.write("This is from request_server");
-    response.end();
-    console.log("request_serer has running");
-};
+function start(route, handle) {
+    function onRequest(request, response){
+        const pathname = url.parse(request.url).pathname;
+        console.log("Request for " + pathname + " received.");
 
-function start_server(){
-    http.createServer(request_server).listen(8080);
-    console.log("start_server has running");
-    //request_server()형태로 넣으면 response.writeHead에서 오류가난다.
-    //아마 writeHead값이 http.createServer아래있는 함수라 그런듯 한다.
-};
+        //handle, pahtname순으로 되어야 pathname이 들거간다.
+        route(handle, pathname);
 
-// start_server();
+        response.writeHead(200, {"Content-Type": "text/plain"});
+        response.write("Hello World");
+        response.end();
+    };
 
-// 모듈화
-module.exports = {
-    start_server
+    http.createServer(onRequest).listen(8080);
+    console.log("Server has started.");
 }
+
+exports.start = start;
 
