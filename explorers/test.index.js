@@ -8,5 +8,3 @@ handle["/start"] = requesthandlers.start;
 handle["/upload"] = requesthandlers.upload;
 
 server.start(router.route, handle);
-
-

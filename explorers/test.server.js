@@ -154,6 +154,7 @@ function start(route, handle) {
         const pathname = url.parse(request.url).pathname;
         console.log("Request for " + pathname + " received.");
 
+        //handle, pahtname순으로 되어야 pathname이 들거간다.
         route(handle, pathname);
 
         response.writeHead(200, {"Content-Type": "text/plain"});
