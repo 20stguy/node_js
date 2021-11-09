@@ -1,7 +1,6 @@
-function test1(test2){
-    test2();
-}
+function test2(){
+    console.log("test22 function")
+};
 
-// test1()
 
-exports.test1 = test1;
+exports.test2 = test2;
