@@ -13,12 +13,10 @@ function start(route, handle) {
     };
 
     http.createServer(onRequest).listen(8080);
-    console.log("Server has started.");
-}
-
+    console.log("Server has started from server.js.");
+};
 // start()
-
 // 모듈화
 module.exports = {
     start
-}
+};
