@@ -144,30 +144,37 @@
 //     start
 // }
 
-// 서버 만들기 9 route 인자로 받기. 비 함수형
-// 설명에 의하면 start함수 안에 모든 함수를 넣었고 이경우 route를 모든 함수에 적용이 가능하다.
-const http = require("http");
-const url = require("url");
-
-function start(route, handle) {
-    function onRequest(request, response){
-        const pathname = url.parse(request.url).pathname;
-        console.log("Request for " + pathname + " received.");
-
-        response.writeHead(200, {"Content-Type": "text/plain"});
-        //handle, pahtname순으로 되어야 pathname이 들거간다.
-        const content = route(handle, pathname);
-        response.write(content);
-        response.end();
-    };
-
-    http.createServer(onRequest).listen(8080);
-    console.log("Server has started.");
-}
-
-exports.start = start;
+// // 서버 만들기 9 route 인자로 받기. 비 함수형
+// // 설명에 의하면 start함수 안에 모든 함수를 넣었고 이경우 route를 모든 함수에 적용이 가능하다.
+// const http = require("http");
+// const url = require("url");
+//
+// function start(route, handle) {
+//     function onRequest(request, response){
+//         const pathname = url.parse(request.url).pathname;
+//         console.log("Request for " + pathname + " received.");
+//
+//         response.writeHead(200, {"Content-Type": "text/plain"});
+//         //handle, pahtname순으로 되어야 pathname이 들거간다.
+//         const content = route(handle, pathname);
+//         response.write(content);
+//         response.end();
+//     };
+//
+//     http.createServer(onRequest).listen(8080);
+//     console.log("Server has started.");
+// }
+//
+// exports.start = start;
 
 // express로 서버 만들기
+const express = require("express")
+const app = express();
 
+function start(rout, handler)=>{
+    const server = app.listen(8080, () =>{
+    console.log("Start server from test.server.js");
+    };
+});
 
-
+// start()
