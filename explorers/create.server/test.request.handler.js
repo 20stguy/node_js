@@ -10,5 +10,5 @@ function upload() {
 
 module.exports = {
     start,
-    upload
-}
+    upload,
+};
