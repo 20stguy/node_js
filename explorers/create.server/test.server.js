@@ -167,16 +167,34 @@
 //
 // exports.start = start;
 
-// express로 서버 만들기
+// // express로 서버 만들기
+// const express = require("express")
+// const app = express();
+// const port = 8080
+//
+// app.get('/', (req, res) => {
+//     res.send("This is from test.server.js get'/'");
+// });
+//
+// app.listen(port,() => {
+//     console.log(`Example app listening at http://localhost:${port}`);
+// });
+
+// express로 서버 만들기2(함수형)
 const express = require("express")
 const app = express();
 const port = 8080
 
-app.get('/', (req, res) => {
-    res.send("This is from test.server.js get'/'");
-});
+function start_server() {
+    app.get('/', (req, res) => {
+        res.send("This is from test.server.js get'/'");
+    });
 
-app.listen(port,() => {
-    console.log(`Example app listening at http://localhost:${port}`);
-});
-// start()
+    app.listen(port,() => {
+        console.log(`Example app listening at http://localhost:${port}`);
+    });
+};
+
+start_server();
+
+
