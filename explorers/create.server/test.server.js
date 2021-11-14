@@ -168,6 +168,15 @@ function start(route, handle) {
 exports.start = start;
 
 // express로 서버 만들기
+const express = require("express")
+const app = express();
+const port = 8080
 
+app.get('/', (req, res) => {
+    res.send("This is from test.server.js get'/'");
+});
 
-
+app.listen(port,() => {
+    console.log(`Example app listening at http://localhost:${port}`);
+});
+// start()
