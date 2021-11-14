@@ -170,11 +170,13 @@
 // express로 서버 만들기
 const express = require("express")
 const app = express();
+const port = 8080
 
-function start(rout, handler)=>{
-    const server = app.listen(8080, () =>{
-    console.log("Start server from test.server.js");
-    };
+app.get('/', (req, res) => {
+    res.send("This is from test.server.js get'/'");
 });
 
+app.listen(port,() => {
+    console.log(`Example app listening at http://localhost:${port}`);
+});
 // start()
